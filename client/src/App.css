@@ -3,6 +3,13 @@
   /* margin: 0 auto; */
   /* padding: 2rem; */
   /* text-align: center; */
+  --background-color: #f9f9f9;
+  --border-color: #ccc;
+  --primary-color: #2d6cdf;
+  --secondary-color: #e63946;
+  --font-size-h3: 24px;
+  --font-size-label: 16px;
+  --font-size-select: 16px;
 }
 
 .logo {
@@ -40,3 +47,55 @@
 .read-the-docs {
   color: #888;
 }
+
+
+/* Styling starts here */
+#state-container {
+  max-width: 500px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  text-align: center;
+
+  h3 {
+    font-size: var(--font-size-h3);
+    color: black;
+    margin-bottom: 1.5rem;
+  }
+  span {
+    color: var(--primary-color);
+  }
+
+  .tmp {
+    color: var(--primary-color);
+  }
+}
+
+
+#state-selection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin-bottom: 20px;
+
+
+  label {
+    font-size: var(--font-size-label);
+    color: #333;
+
+  }
+
+  select {
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    font-size: var(--font-size-select);
+    width: 50%;
+    max-width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
