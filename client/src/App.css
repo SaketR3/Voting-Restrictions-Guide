@@ -1,12 +1,12 @@
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   /* margin: 0 auto; */
   /* padding: 2rem; */
   /* text-align: center; */
   --background-color: #f9f9f9;
   --border-color: #ccc;
   --primary-color: #2d6cdf;
-  --secondary-color: #e63946;
+  --secondary-color: #DA1212;
   --font-size-h3: 24px;
   --font-size-label: 16px;
   --font-size-select: 16px;
@@ -18,9 +18,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -50,41 +52,75 @@
 
 
 /* Styling starts here */
-#state-container {
-  max-width: 500px;
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#voter-info-container {
+  min-width: 500px;
+  max-width: 600px;
   padding: 10px;
   background-color: #fff;
   border: 1px solid var(--border-color);
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-
-  h3 {
+  
+  .voter-info-title {
     font-size: var(--font-size-h3);
     color: black;
     margin-bottom: 1.5rem;
   }
-  span {
-    color: var(--primary-color);
-  }
 
-  .tmp {
-    color: var(--primary-color);
+  span {
+    color: var(--secondary-color);
   }
 }
 
-
-#state-selection {
+#state-form-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 80%;
   margin-bottom: 20px;
+}
 
+.state-search-button {
+    height: 100%; 
+    max-height: 100%;
+    cursor: pointer;
+    background-color: lightcoral;
+    border-color: lightcoral;
+    color: white;
+    font-size: var(--font-size-select);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: lightcoral 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 20%;
+
+    &:hover {
+      background-color: red;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+
+.state-select-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-inline: auto;
+  gap: 20px;
 
   label {
     font-size: var(--font-size-label);
     color: #333;
-
   }
 
   #header-links{
@@ -97,9 +133,8 @@
     border: 1px solid var(--border-color);
     background-color: var(--background-color);
     font-size: var(--font-size-select);
-    width: 50%;
+    width: 100%;
     max-width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 }
-
