@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import useSWRMutation from 'swr/mutation';
 import HeroSection from './HeroSection.jsx'
+import InfoSection from './InfoSection.jsx'
 
 async function fetcher(url) {
   const response = await fetch(url)
@@ -32,7 +33,10 @@ function App() {
   }, [res])
 
   const handleCtaClick = () => {
-    alert('Learn more information');
+    const learnMoreContainer = document.getElementById('learn-more-container');
+    if (learnMoreContainer) {
+      learnMoreContainer.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   const handleSecondaryCtaClick = () => {
@@ -52,6 +56,22 @@ function App() {
                    secondaryCtaText='Search your state'
                    onSecondaryCtaClick={handleSecondaryCtaClick}
         />
+
+        <div id='learn-more-container' className="info-sections-wrapper">
+          <InfoSection
+            title="Adipisicing culpa eu cillum dolore culpa."
+            content="Laboris proident ut velit exercitation veniam est voluptate quis qui non ex. Nostrud exercitation consectetur non veniam elit Lorem do occaecat nostrud culpa quis ex enim magna. Anim sunt elit nostrud magna mollit commodo anim ipsum irure occaecat consectetur ex ullamco tempor. Eu duis veniam tempor fugiat consequat excepteur magna nostrud."
+          />
+          <InfoSection
+            title="Adipisicing culpa eu cillum dolore culpa."
+            content="Aute cillum laboris anim exercitation eu id veniam aute elit nostrud irure ex commodo. Lorem excepteur minim consequat aliqua dolore Lorem dolor fugiat culpa veniam deserunt id elit occaecat. Nisi excepteur pariatur magna incididunt adipisicing est eiusmod. Adipisicing anim nisi mollit aliquip anim."
+          />
+          <InfoSection
+            title="Adipisicing culpa eu cillum dolore culpa."
+            content="Reprehenderit incididunt non magna veniam consequat. In ullamco officia enim est eu ad sunt culpa deserunt aute irure. Incididunt minim sint voluptate proident magna. Exercitation ad ullamco do ullamco velit consectetur est Lorem id. Sunt ex laborum eiusmod id reprehenderit voluptate mollit voluptate ex elit excepteur adipisicing amet non."
+          />
+        </div>
+
         <div id='voter-info-container'>
           <h3 className='voter-info-title'>Learn more about <span>Voter</span> <span className='highlight'>Restrictions</span></h3>
 
