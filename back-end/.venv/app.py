@@ -10,8 +10,11 @@ CORS(app)
 def message():
     # req = request.get_json()
     # data = req['data']
+
+    state = request.args.get('state') 
+    print(state)
     
-    response = requests.get('https://www.lgbtmap.org/democracy_maps/state_profile/GA')
+    response = requests.get(f'https://www.lgbtmap.org/democracy_maps/state_profile/{state}')
     html = response.text
     soup = BeautifulSoup(html, 'lxml')
 
@@ -67,16 +70,16 @@ def message():
         elif t == 5:
             independence = bad_laws
     
-    # print('\n\n\nRegistration: ', registration) 
-    # print('\n\n\nRepresentation: ', representation) 
-    # print('\n\n\nIn-person: ', in_person) 
-    # print('\n\n\nBy mail: ', by_mail) 
-    # print('\n\n\nSecurity: ', security) 
-    # print('\n\n\nIndependence: ', independence) 
+    print('\n\n\nRegistration: ', registration) 
+    print('\n\n\nRepresentation: ', representation) 
+    print('\n\n\nIn-person: ', in_person) 
+    print('\n\n\nBy mail: ', by_mail) 
+    print('\n\n\nSecurity: ', security) 
+    print('\n\n\nIndependence: ', independence) 
 
     return jsonify({'registration': registration},
                     {'representation': representation},
-                    {'in_person': in_person},
-                    {'by_mail': by_mail},
+                    {'inperson': in_person},
+                    {'bymail': by_mail},
                     {'security': security},
                     {'independence': independence})
