@@ -48,7 +48,7 @@ function App() {
 
   return (
     <div className='App'>
-        <HeroSection title='Understand your voting rights' 
+        <HeroSection title="States are passing laws that disenfranchise you. Don't let them." 
                    subtitle='Search for your state to see important voting restrictions and learn how they affect you.'
                    backgroundImage='https://images.unsplash.com/photo-1597700331582-aab3614b3c0c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
                    ctaText='Learn more'
@@ -59,16 +59,20 @@ function App() {
 
         <div id='learn-more-container' className="info-sections-wrapper">
           <InfoSection
-            title="Adipisicing culpa eu cillum dolore culpa."
-            content="Laboris proident ut velit exercitation veniam est voluptate quis qui non ex. Nostrud exercitation consectetur non veniam elit Lorem do occaecat nostrud culpa quis ex enim magna. Anim sunt elit nostrud magna mollit commodo anim ipsum irure occaecat consectetur ex ullamco tempor. Eu duis veniam tempor fugiat consequat excepteur magna nostrud."
+            title="Voting restrictions have been increasing."
+            content="For years, many states have been increasing their voter restrictions. While these states usually claim that these measures increase election security, many groups have pointed out that they disproportionately affect people of color and people in poverty."
           />
           <InfoSection
-            title="Adipisicing culpa eu cillum dolore culpa."
-            content="Aute cillum laboris anim exercitation eu id veniam aute elit nostrud irure ex commodo. Lorem excepteur minim consequat aliqua dolore Lorem dolor fugiat culpa veniam deserunt id elit occaecat. Nisi excepteur pariatur magna incididunt adipisicing est eiusmod. Adipisicing anim nisi mollit aliquip anim."
+            title="It's hard to figure out what restrictions affect you."
+            content="If you try to search online for voting restrictions in your state right now, you'll be greeted with long, confusing lists and large, overwhelming tables full of different restrictions and jargon. Who has the time to parse through all that?"
           />
           <InfoSection
-            title="Adipisicing culpa eu cillum dolore culpa."
-            content="Reprehenderit incididunt non magna veniam consequat. In ullamco officia enim est eu ad sunt culpa deserunt aute irure. Incididunt minim sint voluptate proident magna. Exercitation ad ullamco do ullamco velit consectetur est Lorem id. Sunt ex laborum eiusmod id reprehenderit voluptate mollit voluptate ex elit excepteur adipisicing amet non."
+            title="Empower yourself, quickly."
+            content="Simply search for your state, and our web app will show you what voting restrictions your state has in place in a simple, digestible manner. Once you're aware of the restrictions that affect you, you can search online to find more information about them and how to prepare for them. Here's an example. Let's say you live in Georgia. Using our web app, you could find out that Georgia has voter ID requirements and long voting lines, among other restrictions. You could then take the necessary actions to obtain a voter ID and arrive at your voting booth early."
+          />
+          <InfoSection
+            title="Democracy and the right to vote."
+            content="Due to voting restrictions' disproportionate impact, people of color and people in poverty see much lower voter turnout rates than other demographics, despite their opinions being just as important. With this web app, these disproportionately impacted groups of people can prepare themselves for the restrictions that impact them, so that they can practice their right to vote and ensure our democracy is truly representative of all."
           />
         </div>
 
