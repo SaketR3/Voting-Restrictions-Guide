@@ -18,6 +18,8 @@
     font-size: 1.1rem;
     color: #666;
     line-height: 1.6;
+    padding-left: 20px;
+    border-left: 2px solid var(--border-color);
 }
 
 .info-sections-wrapper {
