@@ -5,10 +5,11 @@ function App() {
   const [state, setState] = useState(0);
   
   return (
-    <div id='state-container'>
-      <h3>Learn more about <span>Voter</span> <span class='tmp'>Restrictions</span></h3>
-      <div id='state-selection'>
-        <div>
+    <div id='voter-info-container'>
+      <h3 className='voter-info-title'>Learn more about <span>Voter</span> <span className='highlight'>Restrictions</span></h3>
+      
+      <div id='state-form-container'>
+        <div className='state-select-wrapper'>
           <label htmlFor='state'>What state are you in? </label>
           <select id='state' name='state' value={state} onChange={e => setState(Number(e.target.value))}>
               <option value={0}>AK</option>
@@ -64,7 +65,7 @@ function App() {
               <option value={50}>WY</option>
           </select>
         </div>
-        <button>Search</button>
+        <button className='state-search-button'>Search</button>
       </div>
     </div>
   )
