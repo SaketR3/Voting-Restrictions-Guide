@@ -1,12 +1,12 @@
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   /* margin: 0 auto; */
   /* padding: 2rem; */
   /* text-align: center; */
   --background-color: #f9f9f9;
   --border-color: #ccc;
   --primary-color: #2d6cdf;
-  --secondary-color: #e63946;
+  --secondary-color: #DA1212;
   --font-size-h3: 24px;
   --font-size-label: 16px;
   --font-size-select: 16px;
@@ -18,9 +18,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -50,6 +52,17 @@
 
 
 /* Styling starts here */
+.App {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#empty {
+  height: 300px;
+}
+
 #voter-info-container {
   max-width: 500px;
   padding: 10px;
@@ -68,7 +81,7 @@
   }
 
   span {
-    color: var(--primary-color);
+    color: var(--secondary-color);
   }
 
 }
@@ -103,7 +116,6 @@
   flex-direction: column;
   align-items: baseline;
   gap: 4px;
-  width: 70%;
 
   label {
     font-size: var(--font-size-label);
@@ -116,7 +128,7 @@
     border: 1px solid var(--border-color);
     background-color: var(--background-color);
     font-size: var(--font-size-select);
-    width: 50%;
+    width: 100%;
     max-width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }

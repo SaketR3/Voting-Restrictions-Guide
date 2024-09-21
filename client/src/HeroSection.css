@@ -1,0 +1,83 @@
+/* HeroSection.css */
+:root {
+    --border-color: #ccc;
+    --primary-color: #2d6cdf;
+    --secondary-color: #DA1212;
+}
+
+.hero-section {
+    width: 100%;
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1; 
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.hero-cta-button, .hero-secondary-cta-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.hero-cta-button {
+    background-color: var(--primary-color); 
+    color: #fff;
+
+    &:hover {
+        background-color: #11468F;
+    }
+}
+
+
+.hero-secondary-cta-button {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #fff; 
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.2); 
+    }
+}
+
