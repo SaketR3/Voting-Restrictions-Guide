@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import useSWRMutation from 'swr/mutation';
+import HeroSection from './HeroSection.jsx'
 
 async function fetcher(url) {
   const response = await fetch(url)
@@ -11,12 +12,6 @@ function App() {
   const [state, setState] = useState('')
   const [loading, setLoading] = useState(false)
   const { trigger, data: res, error } = useSWRMutation(`http://localhost:5000/api?state=${state}`, fetcher)
-  const [registration, setRegistration] = useState([])
-  const [representation, setRepresentation] = useState([])
-  const [inperson, setInperson] = useState([])
-  const [bymail, setByMail] = useState([])
-  const [security, setSecurity] = useState([])
-  const [independence, setIndependence] = useState([])
 
   function handleFormSubmit(e) {
     e.preventDefault()
@@ -36,73 +31,89 @@ function App() {
     setLoading(false)
   }, [res])
 
-  // useEffect(() => {
-  //   console.log(registration)
-  //   console.log(representation)
-  //   console.log(inperson)
-  //   console.log(bymail)
-  //   console.log(security)
-  //   console.log(independence)
-  // }, [registration, representation, inperson, bymail, security, independence])
+  const handleCtaClick = () => {
+    alert('Learn more information');
+  }
+
+  const handleSecondaryCtaClick = () => {
+    const formContainer = document.getElementById('voter-info-container');
+    if (formContainer) {
+      formContainer.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <div>
-        <form onSubmit={handleFormSubmit}>
-          <label htmlFor='state'>What state are you in? </label>
-          <select id='state' name='state' value={state} onChange={e => setState(e.target.value)}>
-              <option value={'AK'}>AK</option>
-              <option value={'AL'}>AL</option>
-              <option value={'AR'}>AR</option>
-              <option value={'AZ'}>AZ</option>
-              <option value={'CA'}>CA</option>
-              <option value={'CO'}>CO</option>
-              <option value={'CT'}>CT</option>
-              <option value={'DE'}>DE</option>
-              <option value={'FL'}>FL</option>
-              <option value={'GA'}>GA</option>
-              <option value={'HI'}>HI</option>
-              <option value={'IA'}>IA</option>
-              <option value={'ID'}>ID</option>
-              <option value={'IL'}>IL</option>
-              <option value={'IN'}>IN</option>
-              <option value={'KS'}>KS</option>
-              <option value={'KY'}>KY</option>
-              <option value={'LA'}>LA</option>
-              <option value={'MA'}>MA</option>
-              <option value={'MD'}>MD</option>
-              <option value={'ME'}>ME</option>
-              <option value={'MI'}>MI</option>
-              <option value={'MN'}>MN</option>
-              <option value={'MO'}>MO</option>
-              <option value={'MS'}>MS</option>
-              <option value={'MT'}>MT</option>
-              <option value={'NC'}>NC</option>
-              <option value={'ND'}>ND</option>
-              <option value={'NE'}>NE</option>
-              <option value={'NH'}>NH</option>
-              <option value={'NJ'}>NJ</option>
-              <option value={'NM'}>NM</option>
-              <option value={'NV'}>NV</option>
-              <option value={'NY'}>NY</option>
-              <option value={'OH'}>OH</option>
-              <option value={'OK'}>OK</option>
-              <option value={'OR'}>OR</option>
-              <option value={'PA'}>PA</option>
-              <option value={'RI'}>RI</option>
-              <option value={'SC'}>SC</option>
-              <option value={'SD'}>SD</option>
-              <option value={'TN'}>TN</option>
-              <option value={'TX'}>TX</option>
-              <option value={'UT'}>UT</option>
-              <option value={'VA'}>VA</option>
-              <option value={'VT'}>VT</option>
-              <option value={'WA'}>WA</option>
-              <option value={'WI'}>WI</option>
-              <option value={'WV'}>WV</option>
-              <option value={'WY'}>WY</option>
-          </select>
-          <input id='submit' type='submit' value='Submit' />
-        </form>
+    <div className='App'>
+        <HeroSection title='Understand your voting rights' 
+                   subtitle='Search for your state to see important voting restrictions and learn how they affect you.'
+                   backgroundImage='https://images.unsplash.com/photo-1597700331582-aab3614b3c0c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                   ctaText='Learn more'
+                   onCtaClick={handleCtaClick}
+                   secondaryCtaText='Search your state'
+                   onSecondaryCtaClick={handleSecondaryCtaClick}
+        />
+        <div id='voter-info-container'>
+          <h3 className='voter-info-title'>Learn more about <span>Voter</span> <span className='highlight'>Restrictions</span></h3>
+
+          <div id='state-form-container'>
+            <form className='state-select-wrapper' onSubmit={handleFormSubmit}>
+              <label htmlFor='state'>What state are you in? </label>
+              <select id='state' name='state' value={state} onChange={e => setState(e.target.value)}>
+                  <option value={'AK'}>AK</option>
+                  <option value={'AL'}>AL</option>
+                  <option value={'AR'}>AR</option>
+                  <option value={'AZ'}>AZ</option>
+                  <option value={'CA'}>CA</option>
+                  <option value={'CO'}>CO</option>
+                  <option value={'CT'}>CT</option>
+                  <option value={'DE'}>DE</option>
+                  <option value={'FL'}>FL</option>
+                  <option value={'GA'}>GA</option>
+                  <option value={'HI'}>HI</option>
+                  <option value={'IA'}>IA</option>
+                  <option value={'ID'}>ID</option>
+                  <option value={'IL'}>IL</option>
+                  <option value={'IN'}>IN</option>
+                  <option value={'KS'}>KS</option>
+                  <option value={'KY'}>KY</option>
+                  <option value={'LA'}>LA</option>
+                  <option value={'MA'}>MA</option>
+                  <option value={'MD'}>MD</option>
+                  <option value={'ME'}>ME</option>
+                  <option value={'MI'}>MI</option>
+                  <option value={'MN'}>MN</option>
+                  <option value={'MO'}>MO</option>
+                  <option value={'MS'}>MS</option>
+                  <option value={'MT'}>MT</option>
+                  <option value={'NC'}>NC</option>
+                  <option value={'ND'}>ND</option>
+                  <option value={'NE'}>NE</option>
+                  <option value={'NH'}>NH</option>
+                  <option value={'NJ'}>NJ</option>
+                  <option value={'NM'}>NM</option>
+                  <option value={'NV'}>NV</option>
+                  <option value={'NY'}>NY</option>
+                  <option value={'OH'}>OH</option>
+                  <option value={'OK'}>OK</option>
+                  <option value={'OR'}>OR</option>
+                  <option value={'PA'}>PA</option>
+                  <option value={'RI'}>RI</option>
+                  <option value={'SC'}>SC</option>
+                  <option value={'SD'}>SD</option>
+                  <option value={'TN'}>TN</option>
+                  <option value={'TX'}>TX</option>
+                  <option value={'UT'}>UT</option>
+                  <option value={'VA'}>VA</option>
+                  <option value={'VT'}>VT</option>
+                  <option value={'WA'}>WA</option>
+                  <option value={'WI'}>WI</option>
+                  <option value={'WV'}>WV</option>
+                  <option value={'WY'}>WY</option>
+              </select>
+              <input className='state-search-button' id='submit' type='submit' value='Submit' />
+            </form>
+          </div>
+        </div>
 
         {(loading && !error) && <p>Loading...</p>}
         {error && <p>An error occurred; please try again.</p>}
