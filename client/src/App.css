@@ -87,6 +87,10 @@
 
   }
 
+  #header-links{
+    height: 100px;
+  }
+
   select {
     padding: 6px;
     border-radius: 5px;
