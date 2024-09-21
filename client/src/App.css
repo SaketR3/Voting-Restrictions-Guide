@@ -50,6 +50,9 @@
   color: #888;
 }
 
+.highlight {
+  color: var(--secondary-color); 
+}
 
 /* Styling starts here */
 .App {
@@ -140,4 +143,17 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
   }
+}
+
+.restrictions {
+  margin-left: 7.5rem;
+}
+
+.restriction-area {
+  margin-top: 3rem; 
+}
+
+.call-to-action {
+  text-align: center; 
+  margin-top: 3rem;
 }
