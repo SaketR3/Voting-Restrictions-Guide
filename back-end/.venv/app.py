@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from bs4 import BeautifulSoup
+from urllib.request import urlopen
 import requests 
 
 app = Flask(__name__)
@@ -76,10 +77,25 @@ def message():
     print('\n\n\nBy mail: ', by_mail) 
     print('\n\n\nSecurity: ', security) 
     print('\n\n\nIndependence: ', independence) 
+    
+    url = "https://vote.gov/register/{state}"
+    page = urlopen(url)
+    html = page.read().decode("utf-8")
+    soup = BeautifulSoup(html, "html.parser")
+    string = soup.get_text()
+    sub1 = "2024"
+    sub2 = "Online"
+    arr = string.split(sub1)
+    arr1 = arr[0].split(sub2)
+    str1 = sub2 + arr1[1]
+    str2 = arr[1] + sub2
+    str3 = arr[2] + sub2
+    registration_deadline = [str1, str2, str3]
 
     return jsonify({'registration': registration},
                     {'representation': representation},
                     {'inperson': in_person},
                     {'bymail': by_mail},
                     {'security': security},
-                    {'independence': independence})
+                    {'independence': independence}
+                    {'registrationdeadline': registration_deadline})
