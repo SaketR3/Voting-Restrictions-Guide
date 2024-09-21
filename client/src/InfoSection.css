@@ -1,0 +1,48 @@
+/* InfoSection.css */
+:root {
+    --border-color: #ccc;
+    --primary-color: #2d6cdf;
+    --secondary-color: #DA1212;
+}
+
+
+.info-title {
+    flex: 0 1 30%; 
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+  
+.info-text {
+    flex: 1; 
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.info-sections-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+  
+.info-section {
+    display: block;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-content {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
