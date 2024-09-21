@@ -86,10 +86,10 @@ def message():
     sub1 = "2024"
     sub2 = "Online"
     arr = string.split(sub1)
-    arr1 = arr[0].split(sub2)
+    arr1 = arr[1].split(sub2)
     str1 = sub2 + arr1[1]
-    str2 = arr[1] + sub2
-    str3 = arr[2] + sub2
+    str2 = arr[2] + sub2
+    str3 = arr[3] + sub2
     registration_deadline = [str1, str2, str3]
 
     return jsonify({'registration': registration},
@@ -97,5 +97,5 @@ def message():
                     {'inperson': in_person},
                     {'bymail': by_mail},
                     {'security': security},
-                    {'independence': independence}
+                    {'independence': independence},
                     {'registrationdeadline': registration_deadline})
