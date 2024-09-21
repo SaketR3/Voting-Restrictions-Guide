@@ -2,9 +2,63 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from bs4 import BeautifulSoup
 import requests 
+from urllib.request import urlopen
 
 app = Flask(__name__)
 CORS(app)
+
+state_codes = {
+    "AL": "alabama",
+    "AK": "alaska",
+    "AZ": "arizona",
+    "AR": "arkansas",
+    "CA": "california",
+    "CO": "colorado",
+    "CT": "connecticut",
+    "DE": "delaware",
+    "FL": "florida",
+    "GA": "georgia",
+    "HI": "hawaii",
+    "ID": "idaho",
+    "IL": "illinois",
+    "IN": "indiana",
+    "IA": "iowa",
+    "KS": "kansas",
+    "KY": "kentucky",
+    "LA": "louisiana",
+    "ME": "maine",
+    "MD": "maryland",
+    "MA": "massachusetts",
+    "MI": "michigan",
+    "MN": "minnesota",
+    "MS": "mississippi",
+    "MO": "missouri",
+    "MT": "montana",
+    "NE": "nebraska",
+    "NV": "nevada",
+    "NH": "new-hampshire",
+    "NJ": "new-jersey",
+    "NM": "new-mexico",
+    "NY": "new-york",
+    "NC": "north-carolina",
+    "ND": "north-dakota",
+    "OH": "ohio",
+    "OK": "oklahoma",
+    "OR": "oregon",
+    "PA": "pennsylvania",
+    "RI": "rhode-island",
+    "SC": "south-carolina",
+    "SD": "south-dakota",
+    "TN": "tennessee",
+    "TX": "texas",
+    "UT": "utah",
+    "VT": "vermont",
+    "VA": "virginia",
+    "WA": "washington",
+    "WV": "west-virginia",
+    "WI": "wisconsin",
+    "WY": "wyoming"
+}
 
 @app.route("/api", methods=["GET"])
 def message():
@@ -70,16 +124,33 @@ def message():
         elif t == 5:
             independence = bad_laws
     
-    print('\n\n\nRegistration: ', registration) 
-    print('\n\n\nRepresentation: ', representation) 
-    print('\n\n\nIn-person: ', in_person) 
-    print('\n\n\nBy mail: ', by_mail) 
-    print('\n\n\nSecurity: ', security) 
-    print('\n\n\nIndependence: ', independence) 
+    # print('\n\n\nRegistration: ', registration) 
+    # print('\n\n\nRepresentation: ', representation) 
+    # print('\n\n\nIn-person: ', in_person) 
+    # print('\n\n\nBy mail: ', by_mail) 
+    # print('\n\n\nSecurity: ', security) 
+    # print('\n\n\nIndependence: ', independence) 
+
+    url = f"https://vote.gov/register/{state_codes[state]}"
+    page = urlopen(url)
+    html = page.read().decode("utf-8")
+    soup = BeautifulSoup(html, "html.parser")
+    string = soup.get_text()
+    sub1 = "2024"
+    sub2 = "Online"
+    arr = string.split(sub1)
+    arr1 = arr[1].split(sub2)
+    str1 = sub2 + arr1[1] + sub1
+    str2 = arr[2] + sub1
+    str3 = arr[3] + sub1
+    registration_deadline = [str1, str2, str3]
+
+    print('\n\n\nRegistration due date: ', registration_deadline)
 
     return jsonify({'registration': registration},
                     {'representation': representation},
                     {'inperson': in_person},
                     {'bymail': by_mail},
                     {'security': security},
-                    {'independence': independence})
+                    {'independence': independence},
+                    {'registrationdeadline': registration_deadline})

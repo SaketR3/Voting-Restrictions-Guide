@@ -222,6 +222,11 @@ function App() {
                   )
                 }
 
+                <h2 className='restriction-area'>Important Due Dates:</h2>
+                <ul>
+                  {res[6].registrationdeadline.map((item, index) => <li key={index}>{item}</li>)}
+                </ul>
+
                 <h2 className='call-to-action'>Now, prepare to vote!</h2>
               </div>
             )}
