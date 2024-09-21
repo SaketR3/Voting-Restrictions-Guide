@@ -53,18 +53,16 @@
 
 /* Styling starts here */
 .App {
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
-
-#empty {
-  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 #voter-info-container {
-  max-width: 500px;
+  min-width: 500px;
+  max-width: 600px;
   padding: 10px;
   background-color: #fff;
   border: 1px solid var(--border-color);
@@ -83,7 +81,6 @@
   span {
     color: var(--secondary-color);
   }
-
 }
 
 #state-form-container {
