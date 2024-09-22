@@ -3,6 +3,7 @@ import './App.css'
 import useSWRMutation from 'swr/mutation'
 import HeroSection from './HeroSection.jsx'
 import InfoSection from './InfoSection.jsx'
+import AddressSection from './AddressSection.jsx'
 
 async function fetcher(url) {
   const response = await fetch(url)
@@ -137,7 +138,7 @@ function App() {
                     <option value={'WV'}>WV</option>
                     <option value={'WY'}>WY</option>
                 </select>
-                <input className='state-search-button' id='submit' type='submit' value='Submit' />
+                <input className='state-search-button' id='submit' type='submit' value='Submit' />              
               </form>
             </div>
           </div>
@@ -227,6 +228,9 @@ function App() {
             )}
           </div>
           <div style={{ marginBottom: "7rem" }}></div>
+          <div className='address-form'>
+            <AddressSection/>
+          </div>
     </div>
   )
 }
