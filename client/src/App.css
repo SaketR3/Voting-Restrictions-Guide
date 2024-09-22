@@ -139,7 +139,7 @@
 }
 
 .restrictions {
-  margin-left: 7.5rem;
+  margin-inline: 5rem;
 }
 
 .restriction-area {
@@ -149,4 +149,57 @@
 .call-to-action {
   text-align: center; 
   margin-top: 3rem;
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 3.25rem; 
+}
+
+#search {
+  padding: 1rem;
+  border: 1.5px solid #3477eb;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  margin-top: 1rem;
+  width: 50%; 
+}
+
+#prompt-submit {
+  padding: 1rem;
+  border: 1.5px solid #3477eb;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin-top: 1rem;
+  background-color: #3477eb;
+  color: white;
+  font-weight: 500;
+}
+
+#prompt-submit:hover {
+  border: 1.5px solid #1e4b8f;
+  background-color: #1e4b8f;
+  cursor: pointer;          
+}
+
+.search-label {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding-top: 1rem;
+  text-align: center;
 }

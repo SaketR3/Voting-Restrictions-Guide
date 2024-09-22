@@ -1,4 +1,6 @@
+import os
 from flask import Flask, request, jsonify
+from flask.cli import load_dotenv
 from flask_cors import CORS
 from bs4 import BeautifulSoup
 import requests 
@@ -6,6 +8,7 @@ from urllib.request import urlopen
 
 app = Flask(__name__)
 CORS(app)
+load_dotenv()
 
 state_codes = {
     "AL": "alabama",
@@ -131,19 +134,23 @@ def message():
     # print('\n\n\nSecurity: ', security) 
     # print('\n\n\nIndependence: ', independence) 
 
-    url = f"https://vote.gov/register/{state_codes[state]}"
-    page = urlopen(url)
-    html = page.read().decode("utf-8")
-    soup = BeautifulSoup(html, "html.parser")
-    string = soup.get_text()
-    sub1 = "2024"
-    sub2 = "Online"
-    arr = string.split(sub1)
-    arr1 = arr[1].split(sub2)
-    str1 = sub2 + arr1[1] + sub1
-    str2 = arr[2] + sub1
-    str3 = arr[3] + sub1
-    registration_deadline = [str1, str2, str3]
+    try:
+        url = f"https://vote.gov/register/{state_codes[state]}"
+        page = urlopen(url)
+        html = page.read().decode("utf-8")
+        soup = BeautifulSoup(html, "html.parser")
+        string = soup.get_text()
+        sub1 = "2024"
+        sub2 = "Online"
+        arr = string.split(sub1)
+        arr1 = arr[1].split(sub2)
+        str1 = sub2 + arr1[1] + sub1
+        str2 = arr[2] + sub1
+        str3 = arr[3] + sub1
+        registration_deadline = [str1, str2, str3]
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+        registration_deadline = ['Online registration deadline: Unknown', 'Register by mail deadline: Unknown', 'In person registration deadline: Unknown']
 
     print('\n\n\nRegistration due date: ', registration_deadline)
 
@@ -154,3 +161,38 @@ def message():
                     {'security': security},
                     {'independence': independence},
                     {'registrationdeadline': registration_deadline})
+
+
+
+@app.route("/api/map", methods=["GET"])
+def api():
+    key = os.getenv('api_key')
+    streetNumber = "13232" # request.args.get('streetnumber') # "13232"
+    streetName = "Corte Villanueva" # request.args.get('streetname') # "Corte Villanueva"
+    streetName = streetName.replace(" ", "+")
+    apartmentNum = ""
+    city = "San Diego" # request.args.get('city') # "San Diego"
+    city = city.replace(" ", "+")
+    state = "CA" # request.args.get('state') # CA 
+    zip = "92129" # request.args.get('zip') # "92129"
+    param = streetNumber + '+' + streetName + ',+' + city + ',+' + state + '+' + zip + "&electionId=2000"
+    url = f"https://www.googleapis.com/civicinfo/v2/voterinfo?{param}&key={key}"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.json()
+        electionInfoUrl = data['state']['electionAdministrationBody']['electionInfoUrl']
+        electionRegistrationUrl = data['state']['electionAdministrationBody']['electionRegistrationUrl']
+        electionRegistrationConfirmationUrl = data['state']['electionAdministrationBody']['electionRegistrationConfirmationUrl']
+        absenteeVotingInfoUrl = data['state']['electionAdministrationBody']['absenteeVotingInfoUrl']
+        votingLocationFinderUrl = data['state']['electionAdministrationBody']['votingLocationFinderUrl']
+        ballotInfoUrl = data['state']['electionAdministrationBody']['ballotInfoUrl']
+        return jsonify({'electionInfoUrl': electionInfoUrl},
+                       {'electionRegistrationUrl': electionRegistrationUrl},
+                       {'electionRegistrationConfirmationUrl': electionRegistrationConfirmationUrl},
+                       {'absenteeVotingInfoUrl': absenteeVotingInfoUrl},
+                       {'votingLocationFinderUrl': votingLocationFinderUrl},
+                       {'ballotInfoUrl': ballotInfoUrl})
+    else:
+        print(f"Error: {response.status_code}")
+        return jsonify({'error': 'Error occurred'})

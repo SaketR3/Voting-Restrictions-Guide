@@ -1,1 +1,5 @@
-GET http://localhost:5000/api?state=TX
+GET http://localhost:5000/api?state=
+
+###
+
+GET http://localhost:5000/api/map?streetnumber=1&streetname=Main&city=Springfield&state=IL&zip=62701

@@ -4,33 +4,61 @@ import useSWRMutation from 'swr/mutation'
 import HeroSection from './HeroSection.jsx'
 import InfoSection from './InfoSection.jsx'
 
-async function fetcher(url) {
+async function restrictionsFetcher(url) {
   const response = await fetch(url)
   return response.json()
 }
 
 function App() {
   const [state, setState] = useState('AK')
-  const [loading, setLoading] = useState(false)
-  const { trigger, data: res, error } = useSWRMutation(`http://localhost:5000/api?state=${state}`, fetcher)
+  const [prompt, setPrompt] = useState('')
+  const [restrictionsLoading, setRestrictionsLoading] = useState(false)
+  const { trigger: restrictionsTrigger, data: res, restrictionsError } = useSWRMutation(`http://localhost:5000/api?state=${state}`, restrictionsFetcher)
 
-  function handleFormSubmit(e) {
+  function handleStateFormSubmit(e) {
     e.preventDefault()
-    setLoading(true)
-    trigger()
+    setRestrictionsLoading(true)
+    restrictionsTrigger()
   }
 
   useEffect(() => {
-    if (res) {
-      console.log(res.registration)
-      console.log(res.representation)
-      console.log(res.inperson)
-      console.log(res.bymail)
-      console.log(res.security)
-      console.log(res.independence)
-    }
-    setLoading(false)
+    // if (res) {
+    //   console.log(res.registration)
+    //   console.log(res.representation)
+    //   console.log(res.inperson)
+    //   console.log(res.bymail)
+    //   console.log(res.security)
+    //   console.log(res.independence)
+    // }
+    setRestrictionsLoading(false)
   }, [res])
+
+  const ragFetcher = async () => {
+    const response = await fetch('http://localhost:3001/api/rag', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        state: state,
+        prompt: prompt
+      }), 
+    });
+    return response.json();
+  }
+
+  const { trigger: ragTrigger, data: rag, error: ragError } = useSWRMutation('http://localhost:3001/api/rag', ragFetcher);
+  const [ragLoading, setRagLoading] = useState(false);
+
+  const handleRagFormSubmit = (e) => {
+    e.preventDefault(); 
+    setRagLoading(true); 
+    ragTrigger(); 
+  }
+
+  useEffect(() => {
+    setRagLoading(false);
+  }, [rag])
 
   const handleCtaClick = () => {
     const learnMoreContainer = document.getElementById('learn-more-container');
@@ -72,7 +100,7 @@ function App() {
               content="Simply search for your state, and our web app will show you what voting restrictions your state has in place in a simple, digestible manner. Once you're aware of the restrictions that affect you, you can search online to find more information about them and how to prepare for them. Here's an example. Let's say you live in Georgia. Using our web app, you could find out that Georgia has voter ID requirements and long voting lines, among other restrictions. You could then take the necessary actions to obtain a voter ID and arrive at your voting booth early."
             />
             <InfoSection
-              title="Democracy and the right to vote."
+              title="We need a diverse, equitable, and inclusive electorate."
               content="Due to voting restrictions' disproportionate impact, people of color and people in poverty see much lower voter turnout rates than other demographics, despite their opinions being just as important. With this web app, these disproportionately impacted groups of people can prepare themselves for the restrictions that impact them, so that they can practice their right to vote and ensure our democracy is truly representative of all."
             />
           </div>
@@ -83,7 +111,7 @@ function App() {
             <h3 className='voter-info-title'>Search for your state's <span>voting</span> <span className='highlight'>restrictions</span></h3>
 
             <div id='state-form-container'>
-              <form className='state-select-wrapper' onSubmit={handleFormSubmit}>
+              <form className='state-select-wrapper' onSubmit={handleStateFormSubmit}>
                 <label htmlFor='state'>What state are you in? </label>
                 <select id='state' name='state' value={state} onChange={e => setState(e.target.value)}>
                     <option value={'AK'}>AK</option>
@@ -144,10 +172,10 @@ function App() {
         </div>
 
         <div className='restrictions'>
-          {(loading && !error) && <p>Loading...</p>}
-          {error && <p>An error occurred; please try again.</p>}
+          {(restrictionsLoading && !restrictionsError) && <p>Loading...</p>}
+          {restrictionsError && <p>An error occurred; please try again.</p>}
 
-          {(!loading && res) && 
+          {(!restrictionsLoading && res) && 
             (
               <div>
                 {res[0].registration && res[0].registration.length > 0 && 
@@ -227,7 +255,21 @@ function App() {
                   {res[6].registrationdeadline.map((item, index) => <li key={index}>{item}</li>)}
                 </ul>
 
-                <h2 className='call-to-action'>Now, prepare to vote!</h2>
+                <h2 className='restriction-area'>Questions?</h2>
+                <p>We've tried our best to display the important restrictions you should know about in a clear manner, but we know you might still have some questions.</p>
+                <p>Just type your question below, and OpenAI's ChatGPT will use its knowledge - as well as knowledge from the Movement Advancement Project's excellent state voting restriction profiles using retrieval augmented generation (RAG) - to answer your question!</p>
+                <em>Please note that even though retrieval augmented generation (RAG) is being used, the answer may contain inaccurate information.</em>
+                <form onSubmit={handleRagFormSubmit}>
+                  <label htmlFor='search' className='search-label visually-hidden'>Search Query: </label>
+                  <div className='search-container'>
+                    <input id='search' type='text' name='search' value={prompt} onChange={(e) => setPrompt(e.target.value)} />
+                    <input id='prompt-submit' type='submit' value='Submit' />
+                  </div>
+                </form>
+
+                {(ragLoading && !ragError) && <p>Loading advice...</p>}
+                {ragError && <p>An error occurred during retrieval augmented generation; please try again later.</p>}
+                {(!ragLoading && rag) && <p>{rag.answer}</p>}
               </div>
             )}
           </div>
