@@ -114,7 +114,7 @@ def api():
     state = "CA"
     zip = "92129"
     param = streetNumber + '+' + streetName + ',+' + city + ',+' + state + '+' + zip + "&electionId=2000"
-    url = "https://www.googleapis.com/civicinfo/v2/voterinfo?{param}&key={api}"
+    url = "https://www.googleapis.com/civicinfo/v2/voterinfo?{param}&key={key}"
     response = requests.get(url)
 
     if response.status_code == 200:

@@ -1,1 +1,3 @@
 GET http://localhost:5000/api?state=TX
+###
+GET http://localhost:5000/api/map
