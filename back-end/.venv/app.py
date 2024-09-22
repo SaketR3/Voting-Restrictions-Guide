@@ -167,14 +167,13 @@ def message():
 @app.route("/api/map", methods=["GET"])
 def api():
     key = os.getenv('api_key')
-    streetNumber = "13232" # request.args.get('streetnumber') # "13232"
-    streetName = "Corte Villanueva" # request.args.get('streetname') # "Corte Villanueva"
+    streetNumber = request.args.get('streetnumber') # "13232"
+    streetName = request.args.get('streetname') # "Corte Villanueva"
     streetName = streetName.replace(" ", "+")
-    apartmentNum = ""
-    city = "San Diego" # request.args.get('city') # "San Diego"
+    city = request.args.get('city') # "San Diego"
     city = city.replace(" ", "+")
-    state = "CA" # request.args.get('state') # CA 
-    zip = "92129" # request.args.get('zip') # "92129"
+    state = request.args.get('state') # CA 
+    zip = request.args.get('zip') # "92129"
     param = streetNumber + '+' + streetName + ',+' + city + ',+' + state + '+' + zip + "&electionId=2000"
     url = f"https://www.googleapis.com/civicinfo/v2/voterinfo?{param}&key={key}"
     response = requests.get(url)

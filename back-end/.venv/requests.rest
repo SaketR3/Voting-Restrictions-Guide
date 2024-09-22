@@ -2,4 +2,4 @@ GET http://localhost:5000/api?state=
 
 ###
 
-GET http://localhost:5000/api/map?streetnumber=1&streetname=Main&city=Springfield&state=IL&zip=62701
+GET https://civicinfo.googleapis.com/civicinfo/v2/voterinfo?address=13232+Corte+Villanueva,+San+Diego,+CA+92129&electionId=2000&key=AIzaSyCBEg0ZRRWseAiKx4-8_bjMy462V4ZjVho
