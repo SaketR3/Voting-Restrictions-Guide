@@ -118,7 +118,19 @@ def api():
     response = requests.get(url)
 
     if response.status_code == 200:
-        return response.json()
+        data = response.json()
+        electionInfoUrl = data['state']['electionAdministrationBody']['electionInfoUrl']
+        electionRegistrationUrl = data['state']['electionAdministrationBody']['electionRegistrationUrl']
+        electionRegistrationConfirmationUrl = data['state']['electionAdministrationBody']['electionRegistrationConfirmationUrl']
+        absenteeVotingInfoUrl = data['state']['electionAdministrationBody']['absenteeVotingInfoUrl']
+        votingLocationFinderUrl = data['state']['electionAdministrationBody']['votingLocationFinderUrl']
+        ballotInfoUrl = data['state']['electionAdministrationBody']['ballotInfoUrl']
+        return jsonify({'electionInfoUrl': electionInfoUrl},
+                       {'electionRegistrationUrl': electionRegistrationUrl},
+                       {'electionRegistrationConfirmationUrl': electionRegistrationConfirmationUrl},
+                       {'absenteeVotingInfoUrl': absenteeVotingInfoUrl},
+                       {'votingLocationFinderUrl': votingLocationFinderUrl},
+                       {'ballotInfoUrl': ballotInfoUrl})
     else:
         print(f"Error: {response.status_code}")
         return None
