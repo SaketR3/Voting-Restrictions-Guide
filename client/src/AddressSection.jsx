@@ -6,6 +6,7 @@ function AddressSection () {
     streetNumber: '',
     streetAddress: '',
     city: '',
+    state: '',
     zip: ''
   });
 
@@ -63,6 +64,18 @@ function AddressSection () {
         </div>
 
         <div className='form-group'>
+          <label htmlFor='state'>State Abbreviation</label>
+          <input
+            type='text'
+            id='state'
+            name='state'
+            value={formData.state}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className='form-group'>
           <label htmlFor='zip'>ZIP Code</label>
           <input
             type='text'
@@ -73,7 +86,7 @@ function AddressSection () {
             required
           />
         </div>
-
+        
         <button type='submit' className='submit-button'>Submit</button>
       </form>
     </div>
