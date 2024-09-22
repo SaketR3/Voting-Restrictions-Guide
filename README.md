@@ -7,6 +7,10 @@ Team Members: Saket Reddy, Leo Meng, Andzhur T
 - Back End: Flask, BeautifulSoup Python module
 - Retrieval Augmented Generation (RAG): Express.js, LangChain, ChatGPT API
 
+### Data Sources
+- MAP for voting restrictions data: https://www.lgbtmap.org/democracy-maps/ratings_by_state
+- Vote.gov for voting and registration deadlines: https://vote.gov/register   
+
 Description:
 ### Voting restrictions have been increasing. 
 For years, many states have been increasing their voter restrictions. While these states usually claim that these measures increase election security, many groups have pointed out that they disproportionately affect people of color and people in poverty.
