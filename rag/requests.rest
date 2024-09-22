@@ -1,0 +1,7 @@
+POST http://localhost:3001/api/rag 
+Content-Type: application/json
+
+{
+    "state": "GA",
+    "prompt": "What are voter ID laws?"
+}
