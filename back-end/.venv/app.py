@@ -2,10 +2,12 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
-import requests 
+import requests
+import os
 
 app = Flask(__name__)
 CORS(app)
+load_dotenv()
 
 @app.route("/api", methods=["GET"])
 def message():
@@ -91,11 +93,32 @@ def message():
     str2 = arr[2] + sub2
     str3 = arr[3] + sub2
     registration_deadline = [str1, str2, str3]
-
+    
     return jsonify({'registration': registration},
-                    {'representation': representation},
-                    {'inperson': in_person},
-                    {'bymail': by_mail},
-                    {'security': security},
-                    {'independence': independence},
-                    {'registrationdeadline': registration_deadline})
+                   {'representation': representation},
+                   {'inperson': in_person},
+                   {'bymail': by_mail},
+                   {'security': security},
+                   {'independence': independence},
+                   {'registrationdeadline': registration_deadline})
+
+@app.route("/api/map", methods=["GET"])
+def api():
+    key = os.getenv('api_key')
+    streetNumber = "13232"
+    streetName = "Corte Villanueva"
+    streetName = streetName.replace(" ", "+")
+    apartmentNum = ""
+    city = "San Diego"
+    city = city.replace(" ", "+")
+    state = "CA"
+    zip = "92129"
+    param = streetNumber + '+' + streetName + ',+' + city + ',+' + state + '+' + zip + "&electionId=2000"
+    url = "https://www.googleapis.com/civicinfo/v2/voterinfo?{param}&key={api}"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Error: {response.status_code}")
+        return None
